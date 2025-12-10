@@ -44,37 +44,32 @@ document.addEventListener('DOMContentLoaded', () => {
     // 페이지 로드 시 초기 상태 확인
     handleScroll();
 
-    // ----------------------------------------------------
-    // 📌 2. 메뉴 항목 클릭 시 부드러운 스크롤 이동 & 현재 페이지 메뉴 하이라이트 & 햄버거 메뉴 닫기
-    // ----------------------------------------------------
-    const navLinks = document.querySelectorAll('#navbar nav ul li a');
-    const menuToggle = document.getElementById('menu-toggle'); 
+    const menuToggle = document.getElementById('menu-toggle');
     const nav = document.querySelector('#navbar nav'); // <nav> 요소를 선택
 
+    if (menuToggle && nav) {
+        menuToggle.addEventListener('click', () => {
+            // 햄버거 아이콘의 상태를 전환 (X자 애니메이션)
+            menuToggle.classList.toggle('active'); 
+            
+            // 메뉴의 가시성을 전환 (active-menu 클래스를 토글)
+            nav.classList.toggle('active-menu');
+        });
+    }
+
+    // ----------------------------------------------------
+    // 📌 4. 메뉴 항목 클릭 시 메뉴 닫기 (사용자 경험 개선)
+    // ----------------------------------------------------
+    const navLinks = document.querySelectorAll('#navbar nav ul li a');
 
     navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const targetHref = link.getAttribute('href');
-            
-            // 앵커 링크 (#) 처리 (부드러운 스크롤)
-            if (targetHref.startsWith('#')) {
-                e.preventDefault(); // 기본 앵커 이동 방지
-                const targetElement = document.querySelector(targetHref);
-                
-                if (targetElement && navbar) {
-                    const offset = navbar.offsetHeight;
-                    window.scrollTo({
-                        top: targetElement.offsetTop - offset, // 메뉴바 높이만큼 빼서 정확히 보이게 함
-                        behavior: 'smooth'
-                    });
-                }
-            }
-            
-            // 🚨 햄버거 메뉴 닫기 (모바일 환경에서 앵커나 링크 클릭 시 메뉴 닫기)
-            // 파일 링크 클릭 시는 페이지가 이동되므로 페이지 이동 전에 닫아주는 것이 좋습니다.
+        link.addEventListener('click', () => {
+            // 모바일 메뉴가 활성화되어 있을 때만 닫기
             if (nav && nav.classList.contains('active-menu')) {
-                if (menuToggle) menuToggle.classList.remove('active');
                 nav.classList.remove('active-menu');
+            }
+            if (menuToggle && menuToggle.classList.contains('active')) {
+                menuToggle.classList.remove('active');
             }
         });
     });
@@ -193,21 +188,5 @@ document.addEventListener('DOMContentLoaded', () => {
             slideTimer = setTimeout(autoSlide, 5000);
         }
     }
-
-
-    // ----------------------------------------------------
-    // 📌 4. 햄버거 메뉴 토글 기능
-    // ----------------------------------------------------
-    // menuToggle과 nav 변수는 2번 섹션에서 선언됨.
-
-    if (menuToggle && nav) {
-        menuToggle.addEventListener('click', () => {
-            // 햄버거 아이콘의 상태를 전환 (X자 애니메이션)
-            menuToggle.classList.toggle('active'); 
-            
-            // 메뉴의 가시성을 전환 (active-menu 클래스를 토글)
-            nav.classList.toggle('active-menu');
-        });
-    }
-
+    
 });
