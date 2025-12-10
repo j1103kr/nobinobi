@@ -188,5 +188,32 @@ document.addEventListener('DOMContentLoaded', () => {
             slideTimer = setTimeout(autoSlide, 5000);
         }
     }
-    
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+
+        if (question && answer) {
+            question.addEventListener('click', () => {
+                // 현재 클릭된 질문이 이미 활성화(열려있는) 상태인지 확인
+                const isActive = answer.classList.contains('active');
+
+                // 모든 답변 닫기 (하나만 열리도록)
+                faqItems.forEach(i => {
+                    const ans = i.querySelector('.faq-answer');
+                    const qst = i.querySelector('.faq-question');
+                    ans.classList.remove('active');
+                    qst.classList.remove('active');
+                });
+                
+                // 닫혀있었다면 열기
+                if (!isActive) {
+                    answer.classList.add('active');
+                    question.classList.add('active');
+                }
+            });
+        }
+    });
+
 });
