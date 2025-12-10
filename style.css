@@ -178,7 +178,7 @@ html, body {
 }
 
 .activities-section {
-    background-color: var(--main-pink);
+    background-color: var(--white);
 }
 
 .gallery-section {
@@ -186,7 +186,7 @@ html, body {
 }
 
 .faq-section {
-    background-color: var(--main-pink);
+    background-color: var(--white);
 }
 
 /* 📌 갤러리 그리드 스타일 */
