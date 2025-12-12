@@ -287,8 +287,7 @@ footer .container {
 #topBtn:hover {
     opacity: 1;
 }
-
-/* ⚠️ 기존 .home-section 내부의 h2, p 스타일이 충돌하지 않도록 메인 헤드라인/태그라인을 사용 */
+메인 헤드라인/태그라인을 사용 */
 .home-section .section-content h2,
 .home-section .section-content p {
     display: none; 
@@ -519,7 +518,7 @@ footer .container {
 }
 
 .cta-button:hover {
-    background-color: #e2c0c5; /* 핑크색이 살짝 어두워짐 */
+    background-color: #e2c0c5;
 }
 
 /* 모바일 반응형: 카드를 세로로 쌓기 */
@@ -589,7 +588,7 @@ footer .container {
 
 /* 두 번째 CTA 버튼 스타일 (features 섹션의 버튼과 통일) */
 .secondary-cta {
-    background-color: var(--main-pink); /* 'pinkish' 오타 수정 및 통일 */
+    background-color: var(--main-pink);
 }
 
 /* 모바일 반응형: 항목을 세로로 쌓기 */
@@ -883,25 +882,22 @@ footer .container {
     margin: 40px 0;
 }
 
-/* ---------------------------------------------------- */
-/* 📌 CTA 버튼 디자인 통일 */
-/* ---------------------------------------------------- */
 .cta-button {
     display: inline-block;
-    padding: 12px 25px;
-    background-color: #cc4d55; /* 진한 핑크 */
-    color: var(--white);
+    padding: 10px 15px;
+    background-color: var(--main-pink); /* 진한 핑크 */
+    color: var(--dark-text);
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     transition: background-color 0.3s;
     margin-top: 15px;
-    border: none;
+    border: 2px solid #cc4d55;
     cursor: pointer;
 }
 
 .cta-button:hover {
-    background-color: #a04040; /* 호버 시 더 진하게 */
+    background-color: #e2c0c5;
 }
 
 .secondary-cta {
@@ -915,10 +911,6 @@ footer .container {
     color: #a04040;
 }
 
-
-/* ---------------------------------------------------- */
-/* 📌 activities.html 전용 스타일 */
-/* ---------------------------------------------------- */
 .activity-block h3 {
     margin-bottom: 10px !important;
 }
