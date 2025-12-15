@@ -162,15 +162,6 @@ html, body {
     line-height: 1.1;
 }
 
-/* 슬로건/태그라인 스타일 */
-.tagline {
-    font-size: 1.8em;
-    font-weight: 400;
-    color: #555;
-    margin-bottom: 25px;
-}
-
-
 /* 각 섹션에 배경색 차이 주기 */
 .about-section {
     background-color: var(--white);
@@ -786,7 +777,7 @@ footer .container {
     }
 }
 .tagline-highlight {
-    color: #cc4d55; /* 메인 핑크색보다 진한 강조 색상 */
+    color: #000000; /* 메인 핑크색보다 진한 강조 색상 */
     font-weight: 700;
     transition: color 0.3s;
 }
@@ -795,7 +786,7 @@ footer .container {
 .main-divider {
     width: 60px; /* 짧게 설정 */
     height: 3px;
-    background-color: #cc4d55; /* 포인트 색상 */
+    background-color: #000000; /* 포인트 색상 */
     border: none;
     margin: 0 auto 50px auto; /* 중앙 정렬 및 아래 섹션과의 간격 */
     border-radius: 2px;
@@ -902,7 +893,7 @@ footer .container {
 }
 .tagline {
     font-size: 1.2em;
-    color: #cc4d55; /* 메인 핑크 강조 */
+    color: #000000; /* 메인 핑크 강조 */
     margin-top: 15px;
     margin-bottom: 30px;
     font-weight: 500;
@@ -940,7 +931,7 @@ footer .container {
 
 .secondary-cta {
     background-color: var(--white);
-    color: #cc4d55;
+    color: #000000;
     border: 2px solid #cc4d55;
 }
 
@@ -951,10 +942,11 @@ footer .container {
 
 .activity-block h3 {
     margin-bottom: 10px !important;
+    color: #000000;
 }
 
 .activity-block i {
-    color: #cc4d55;
+    color: #000000;
     margin-right: 10px;
 }
 
@@ -962,7 +954,7 @@ footer .container {
     margin-top: 60px;
     margin-bottom: 20px;
     font-size: 1.8em;
-    color: #cc4d55;
+    color: #000000;
     text-align: left;
     border-bottom: 2px solid #f4e2e4;
     padding-bottom: 10px;

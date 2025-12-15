@@ -1,15 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ----------------------------------------------------
-    // 📌 1. 상단 이동 버튼 기능 (topBtn) 및 Navbar 스크롤 효과
-    // ----------------------------------------------------
     const topBtn = document.getElementById("topBtn");
     const navbar = document.getElementById('navbar');
     const scrollThreshold = 10; // 10px 이상 스크롤 했을 때 그림자 추가
 
-    // topBtn 초기화 및 이벤트 연결
     if (topBtn) {
-        // 스크롤 시 버튼 표시/숨김
         window.addEventListener("scroll", () => {
             if (window.scrollY > 250) {
                 topBtn.style.display = "block";
@@ -76,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     
     function setActiveLink() {
-        // 현재 URL의 경로를 가져옵니다.
+        // 현재 URL의 경로를 가져옵니다. (예: index.html 또는 ""(루트 경로))
         const currentPathname = window.location.pathname.toLowerCase().split('/').pop(); 
 
         navLinks.forEach(link => {
@@ -111,8 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
             } 
             // 2) 파일 링크 (다른 페이지로 이동)인 경우
             else {
-                // 링크의 파일 이름과 현재 URL의 파일 이름이 같을 때 활성화
-                if (currentPathname === linkHref) {
+                // 경로 일치 조건:
+                // a) 링크의 파일 이름과 현재 URL의 파일 이름이 같거나
+                // b) 링크가 'index.html'이고 현재 경로가 빈 문자열(루트)일 때
+                const isIndexAndRoot = (linkHref === 'index.html' && currentPathname === '');
+
+                if (currentPathname === linkHref || isIndexAndRoot) {
                     link.classList.add('active');
                 }
             }
@@ -188,6 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
             slideTimer = setTimeout(autoSlide, 5000);
         }
     }
+    
+    // ----------------------------------------------------
+    // 📌 5. FAQ 아코디언 기능
+    // ----------------------------------------------------
     const faqItems = document.querySelectorAll('.faq-item');
 
     faqItems.forEach(item => {
