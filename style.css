@@ -138,18 +138,17 @@ html, body {
     margin: 0 auto;
 }
 
-/* 동아리 메인 이미지 스타일 */
 .main-hero-image {
-    /* 🚨 수정: 일반 이미지 스타일 - 높이 300px, 마진 15px 적용 */
     max-width: 1200px !important; 
-    max-height: 550px !important; /* 600px -> 300px */
-    width: auto !important; 
-    height: 550px !important;      /* 600px -> 300px */
+    max-height: none !important;
+    width: 100% !important; 
+    height: auto !important;
+    aspect-ratio: 16 / 9;
     
     object-fit: cover; 
     border-radius: 15px; 
     display: block; 
-    margin: 5px auto -50px auto;      /* 30px -> 15px */
+    margin: 5px auto -50px auto;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
 }
 
@@ -189,27 +188,69 @@ html, body {
     background-color: var(--white);
 }
 
-/* 📌 갤러리 그리드 스타일 */
 .gallery-grid {
     display: grid;
+    /* 3열 레이아웃을 유지하되, 반응형으로 최소 250px 너비 */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    gap: 15px; /* 프리뷰와 동일한 간격 */
     margin-top: 40px;
     padding: 0 20px;
+    max-width: 1000px; /* 프리뷰와 유사한 최대 너비 설정 */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.gallery-grid img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+/* 갤러리 항목 스타일 (16:9 비율 컨테이너 적용) */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-    cursor: zoom-in;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* 🚨 16:9 비율을 위한 핵심 수정 */
+    padding-top: 56.25%; /* 9 / 16 * 100% = 56.25% */
+    height: 0; /* padding-top을 사용하기 위해 높이 0으로 설정 */
 }
 
-.gallery-grid img:hover {
-    transform: scale(1.05);
+.gallery-item:hover {
+    transform: scale(1.03); /* 호버 시 확대 */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 갤러리 이미지 스타일 */
+.gallery-item img {
+    /* 🚨 16:9 공간을 채우도록 수정 */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    object-fit: cover; /* 이미지가 잘리더라도 영역을 채우도록 설정 */
+    display: block;
+    
+    /* 기존 스타일에서 제거/수정된 부분 */
+    aspect-ratio: unset; /* height: 100%와 충돌하지 않도록 unset */
+    box-shadow: none; /* 컨테이너에 그림자가 있으므로 이미지 그림자 제거 */
+}
+
+/* 갤러리 캡션 스타일 (이미지가 캡션을 덮지 않도록 위치 조정) */
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(204, 77, 85, 0.85); 
+    color: var(--white);
+    padding: 8px 10px; /* 프리뷰 캡션과 유사하게 조정 */
+    text-align: left; /* 캡션 텍스트 왼쪽 정렬 */
+    font-size: 14px;
+}
+
+.gallery-caption h4 {
+    margin: 0;
+    font-size: 1em;
 }
 
 /* 📌 푸터 (Footer) 스타일 */
@@ -373,8 +414,6 @@ footer .container {
     /* 이미지 크기 조정 */
     .main-hero-image {
         max-width: 100% !important; 
-        max-height: 550px !important; 
-        height: 550px !important;
         margin: 0 auto 20px auto;
     }
 
@@ -384,8 +423,9 @@ footer .container {
     }
 
     .gallery-grid {
-        grid-template-columns: 1fr;
-        gap: 15px;
+        grid-template-columns: repeat(2, 1fr); /* 모바일/태블릿에서는 2열 */
+        gap: 10px;
+        padding: 0 10px;
     }
 }
 /* 📌 슬라이드 쇼 관련 스타일 추가 */
@@ -448,10 +488,9 @@ footer .container {
 
 /* 모바일 반응형에 대한 추가 조정 */
 @media (max-width: 768px) {
-    .main-hero-image {
-        /* 🚨 필수 수정: 모바일 높이를 300px로 통일 */
-        max-height: 550px !important; /* 600px -> 300px 수정 */
-        height: 550px !important;      /* 600px -> 300px 수정 */
+    .main-hero-image { 
+        max-height: none !important;
+        height: auto !important;
     }
 }
 .features-section {
@@ -626,9 +665,8 @@ footer .container {
 
 .gallery-preview-grid {
     display: grid;
-    /* 데스크톱: 3열 레이아웃 */
     grid-template-columns: repeat(3, 1fr); 
-    gap: 15px; /* 이미지 간 간격 */
+    gap: 15px;
     margin-bottom: 40px;
     max-width: 1000px;
     margin-left: auto;
@@ -920,52 +958,6 @@ footer .container {
     margin-right: 10px;
 }
 
-/* ---------------------------------------------------- */
-/* 📌 gallery.html 전용 스타일 */
-/* ---------------------------------------------------- */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 반응형 3단 그리드 */
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 300px; /* 모든 사진 높이 통일 */
-    object-fit: cover; 
-    display: block;
-}
-
-.gallery-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(204, 77, 85, 0.85); 
-    color: var(--white);
-    padding: 5px;
-    text-align: center;
-}
-
-.gallery-caption h4 {
-    margin-bottom: 5px;
-    font-size: 1.1em;
-}
-
 .category-title {
     margin-top: 60px;
     margin-bottom: 20px;
@@ -976,10 +968,6 @@ footer .container {
     padding-bottom: 10px;
 }
 
-
-/* ---------------------------------------------------- */
-/* 📌 faq.html 전용 스타일 (아코디언) */
-/* ---------------------------------------------------- */
 .faq-container {
     max-width: 900px;
     margin: 50px auto;
@@ -1038,9 +1026,6 @@ footer .container {
     color: #cc4d55;
 }
 
-/* ---------------------------------------------------- */
-/* 📌 모바일 반응형 추가 (선택 사항) */
-/* ---------------------------------------------------- */
 @media (max-width: 600px) {
     .faq-container {
         margin: 30px 0;
@@ -1052,4 +1037,14 @@ footer .container {
     .faq-answer.active {
         padding: 10px 15px 15px 15px;
     }
+}
+.gallery-preview-grid .gallery-item img {
+    width: 100%;
+    height: auto; 
+    aspect-ratio: 16 / 9; /* 16:9 비율 적용 */
+    object-fit: cover;
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    cursor: pointer;
 }
